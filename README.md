@@ -35,3 +35,5 @@ primus.use('Mongo', PrimusMongo);
 //
 primus.write('Hello world!'); 
 ```
+
+Inspired by [primus-redis](https://github.com/mmalecki/primus-redis)
