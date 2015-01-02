@@ -1,0 +1,35 @@
+{
+  "name": "primus-mongodb",
+  "version": "0.0.1",
+  "description": "A MongoDB store for Primus",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/djMax/primus-mongodb.git"
+  },
+  "keywords": [
+    "primus",
+    "websockets",
+    "mongodb",
+    "node.js"
+  ],
+  "author": "Max Metral",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/djMax/primus-mongodb/issues"
+  },
+  "homepage": "https://github.com/djMax/primus-mongodb",
+  "devDependencies": {
+    "assert-called": "^0.1.2-1",
+    "mocha": "^2.1.0",
+    "primus": "^2.4.12",
+    "ws": "^0.6.4"
+  },
+  "dependencies": {
+    "mongodb": "^1.4.26",
+    "mubsub": "^1.0.4"
+  }
+}
