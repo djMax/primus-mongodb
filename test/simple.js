@@ -32,6 +32,19 @@ describe('primus-mongodb', function () {
         return primus;
     }
 
+    // Cleanup any existing collection
+    before(function (done) {
+        MongoClient.connect('mongodb://localhost:27017/primus-test-db', function (err, db) {
+            if (err) {
+                return done(err);
+            }
+            db.collection('primus-test').drop(function () {
+                // Don't care if this fails, as the collection probably doesn't exist.
+                done();
+            });
+        });
+    });
+
     it('should create primus servers', function () {
         primus0 = getPrimus();
         primus1 = getPrimus();
@@ -87,8 +100,8 @@ describe('primus-mongodb', function () {
                 done();
             }
         };
-        primus0.write({msg:'hello world '+d, from:'client0'});
-        primus1.write({msg:'hello world '+d, from:'client1'});
+        primus0.write({msg: 'hello world ' + d, from: 'client0'});
+        primus1.write({msg: 'hello world ' + d, from: 'client1'});
     });
 
 });
