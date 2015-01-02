@@ -3,6 +3,7 @@ var http = require('http'),
     Primus = require('primus'),
     cb = require('assert-called'),
     PrimusMongo = require('../'),
+    MongoClient = require('mongodb').MongoClient,
     PORT = 3456;
 
 describe('primus-mongodb', function () {
@@ -58,7 +59,22 @@ describe('primus-mongodb', function () {
             assert.equal(msg.msg, 'hello world ' + d);
             waiting();
         }));
-    })
+    });
+
+    it('should work with an explicit mongo client', function (done) {
+        MongoClient.connect('mongodb://localhost:27017/primus-test-db', function (err, db) {
+            var server = http.createServer();
+            var primus = new Primus(server, {
+                mongo: {
+                    client: db,
+                    collection: 'primus-test'
+                },
+                transformer: 'websockets'
+            });
+            primus.use('Mongo', PrimusMongo);
+            done(err);
+        });
+    });
 
     it('should send and receive messages', function (done) {
         var inboundExpected = 4;
@@ -72,4 +88,5 @@ describe('primus-mongodb', function () {
         primus0.write({msg:'hello world '+d, from:'client0'});
         primus1.write({msg:'hello world '+d, from:'client1'});
     });
+
 });

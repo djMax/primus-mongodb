@@ -16,7 +16,7 @@ var PrimusMongo = module.exports = function (primus, options) {
         if (!options.mongo.client) {
             throw new Error('You must specify a url or client property in the mongo key of your configuration');
         }
-        return options.mongo.client;
+        return mubsub(options.mongo.client);
     }
 
     client = getClient();

@@ -1,6 +1,6 @@
 {
   "name": "primus-mongodb",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A MongoDB store for Primus",
   "main": "index.js",
   "scripts": {
