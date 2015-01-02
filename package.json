@@ -24,6 +24,7 @@
   "homepage": "https://github.com/djMax/primus-mongodb",
   "devDependencies": {
     "assert-called": "^0.1.2-1",
+    "longjohn": "^0.2.4",
     "mocha": "^2.1.0",
     "primus": "^2.4.12",
     "ws": "^0.6.4"

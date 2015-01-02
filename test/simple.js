@@ -6,6 +6,8 @@ var http = require('http'),
     MongoClient = require('mongodb').MongoClient,
     PORT = 3456;
 
+require('longjohn');
+
 describe('primus-mongodb', function () {
 
     var server,
