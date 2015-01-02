@@ -45,12 +45,12 @@ describe('primus-mongodb', function () {
         });
     });
 
-    it('should create primus servers', function () {
+    it('should create primus servers', function createServers() {
         primus0 = getPrimus();
         primus1 = getPrimus();
     });
 
-    it('should create client 1', function (done) {
+    it('should create client 1', function createClient1(done) {
         client0 = new (primus0.Socket)('http://localhost:' + --PORT);
         client0.on('open', cb(function () {
             console.log('client 1 open');
@@ -63,7 +63,7 @@ describe('primus-mongodb', function () {
         }));
     });
 
-    it('should create client 0', function (done) {
+    it('should create client 0', function createClient0(done) {
         client1 = new (primus1.Socket)('http://localhost:' + --PORT);
         client1.on('open', cb(function () {
             console.log('client 1 open');
@@ -76,7 +76,7 @@ describe('primus-mongodb', function () {
         }));
     });
 
-    it('should work with an explicit mongo client', function (done) {
+    it('should work with an explicit mongo client', function explicitClient(done) {
         MongoClient.connect('mongodb://localhost:27017/primus-test-db', function (err, db) {
             var server = http.createServer();
             var primus = new Primus(server, {
@@ -91,7 +91,7 @@ describe('primus-mongodb', function () {
         });
     });
 
-    it('should send and receive messages', function (done) {
+    it('should send and receive messages', function sendAndReceivePrimus(done) {
         var inboundExpected = 4;
         waiting = function () {
             if (--inboundExpected === 0) {
@@ -101,7 +101,9 @@ describe('primus-mongodb', function () {
             }
         };
         primus0.write({msg: 'hello world ' + d, from: 'client0'});
-        primus1.write({msg: 'hello world ' + d, from: 'client1'});
+        setTimeout(function () {
+            primus1.write({msg: 'hello world ' + d, from: 'client1'});
+        }, 1000);
     });
 
 });
